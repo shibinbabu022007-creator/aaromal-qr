@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aaromal - QR Song</title>
+<style>
+  body { font-family: sans-serif; text-align: center; padding: 40px 20px; }
+  audio { width: 100%; max-width: 500px; }
+</style>
+</head>
+<body>
+  <h2>🎵 Aaromal</h2>
+  <p>2:30 – 3:38</p>
+  <audio id="song" controls preload="metadata">
+    <source src="song.mp3" type="audio/mpeg">
+  </audio>
+
+<script>
+const audio = document.getElementById("song");
+const START = 150; // 2:30
+const END = 218;   // 3:38
+
+audio.addEventListener("loadedmetadata", () => {
+  audio.currentTime = START;
+});
+
+audio.addEventListener("play", () => {
+  if (audio.currentTime < START || audio.currentTime >= END) {
+    audio.currentTime = START;
+  }
+});
+
+audio.addEventListener("timeupdate", () => {
+  if (audio.currentTime >= END) {
+    audio.pause();
+    audio.currentTime = START;
+  }
+});
+</script>
+</body>
+</html>
